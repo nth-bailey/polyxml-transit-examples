@@ -105,7 +105,7 @@ dependencies = [
 
 [[package]]
 name = "polyxml"
-version = "0.19.1"
+version = "0.19.2"
 dependencies = [
  "heck",
  "lexical-core",

@@ -1,7 +1,7 @@
 # 🚍 PolyXML Transit Showcase: Google GTFS-Realtime ↔ European CEN SIRI v2.0 & NeTEx
 
 [![CI](https://github.com/nth-bailey/polyxml-transit-examples/actions/workflows/ci.yml/badge.svg)](https://github.com/nth-bailey/polyxml-transit-examples/actions/workflows/ci.yml)
-[![PolyXML Compiler](https://img.shields.io/badge/PolyXML-v0.14.2-blue.svg)](https://github.com/nth-bailey/PolyXML)
+[![PolyXML Compiler](https://img.shields.io/badge/PolyXML-v0.19.2-blue.svg)](https://github.com/nth-bailey/PolyXML)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Languages](https://img.shields.io/badge/Languages-Rust%20%7C%20Python%20%7C%20Go%20%7C%20C%2B%2B%20%7C%20Java%20%7C%20TypeScript%20%7C%20C%23-orange.svg)](#cross-language-matrix)
 
