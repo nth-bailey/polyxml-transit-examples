@@ -1,0 +1,42 @@
+PolyXML Transit Examples
+Copyright (c) 2026 Bailey Nguyen
+
+This project is licensed under the MIT License (see the LICENSE file in the root directory).
+
+================================================================================
+Third-Party Standards, Specifications, and Data Notices
+================================================================================
+
+This software includes, references, or derives data contracts from the following
+third-party specifications and open transit standards:
+
+1. Google GTFS-Realtime (General Transit Feed Specification Realtime)
+   - Copyright (c) 2015 Google Inc. / MobilityData
+   - Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at:
+         http://www.apache.org/licenses/LICENSE-2.0
+   - Files: schemas/gtfs/gtfs-realtime.proto, data/gtfs_realtime_vehicle.json
+
+2. CEN SIRI (Service Interface for Real Time Information) v2.0
+   - Organization: European Committee for Standardization (CEN) / Technical Committee 278
+   - Source Standard: CEN/TS 15531 / EN 15531 (siri.org.uk)
+   - Status: Open European standard published for public transport real-time data exchange.
+   - Files: schemas/transit/siri_core.xsd, data/siri_vehicle_monitoring.xml
+
+3. Open Transit Data (Amsterdam GVB / NDOV Loket)
+   - Source: Open telemetry formats from the Netherlands National Data Warehouse for Public Transport (NDOV)
+     and Municipal Transport Operator (GVB Amsterdam).
+   - Usage: Sample telemetry payloads provided for demonstration and testing purposes.
+
+================================================================================
+Trademark Notices
+================================================================================
+
+- "Google" and "GTFS" are registered trademarks or service marks of Google LLC.
+- "CEN" is a registered trademark of the European Committee for Standardization.
+- "GVB" is a trademark of Gemeente Vervoerbedrijf Amsterdam.
+- All trademarks, service marks, and trade names referenced in this repository are the property
+  of their respective owners. Their mention in this repository does not imply endorsement,
+  sponsorship, or affiliation, and is used strictly for descriptive identification and
+  interoperability demonstration under fair use.

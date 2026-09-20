@@ -369,7 +369,10 @@ polyxml-transit-examples/
 
 ---
 
-## 📜 License
+## 📜 License & Notices
 
-MIT License. Developed as an official showcase of [PolyXML](https://github.com/nth-bailey/PolyXML).
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for full terms.
+
+For third-party standards, specifications, open transit licenses (Apache 2.0 for GTFS Realtime), and trademark notices, see [`NOTICE`](NOTICE).
+All schemas are sourced from open international standards bodies ([Google GTFS-Realtime](https://gtfs.org/realtime/) and [CEN SIRI](http://www.siri.org.uk/)).
 
