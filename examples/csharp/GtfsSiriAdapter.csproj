@@ -10,3 +10,4 @@
     <Compile Include="../../generated/csharp/**/*.cs" Link="Generated/%(RecursiveDir)%(FileName)%(Extension)" />
   </ItemGroup>
 </Project>
+

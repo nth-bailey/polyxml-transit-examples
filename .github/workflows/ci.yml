@@ -24,6 +24,12 @@ jobs:
 
       - name: Set up Rust toolchain
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Verify Rust Code Formatting
+        working-directory: polyxml-transit-examples
+        run: cargo fmt --manifest-path examples/rust/Cargo.toml -- --check
 
       - name: Set up Go 1.22+
         uses: actions/setup-go@v5
@@ -78,3 +84,4 @@ jobs:
         working-directory: polyxml-transit-examples
         run: |
           ./scripts/run_all.sh
+

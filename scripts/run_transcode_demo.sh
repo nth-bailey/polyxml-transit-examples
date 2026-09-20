@@ -50,3 +50,4 @@ echo -e "\n[5] Validating CEN SIRI v2.0 XML Schema:"
 "${POLYXML_BIN}" validate schemas/transit/siri_core.xsd
 
 echo -e "\n✅ PolyXML CLI Bidirectional Streaming & Schema-Directed Transcoding Complete!"
+

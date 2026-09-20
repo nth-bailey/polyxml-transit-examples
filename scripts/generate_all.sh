@@ -71,7 +71,13 @@ echo -e "\n[7/7] 🔷 Generating C# 12 / .NET 8 (Primary Constructor Records & D
   --package "Transit.Siri" \
   --out generated/csharp
 
+# Format Rust code
+if command -v cargo &>/dev/null && [ -f examples/rust/Cargo.toml ]; then
+    cargo fmt --manifest-path examples/rust/Cargo.toml || true
+fi
+
 echo ""
 echo "================================================================================"
 echo "✅ Code generation finished across all 7 targets!"
 echo "================================================================================"
+

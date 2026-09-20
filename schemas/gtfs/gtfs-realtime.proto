@@ -107,3 +107,4 @@ message TripDescriptor {
 // Placeholders for full GTFS-RT spec compatibility
 message TripUpdate {}
 message Alert {}
+

@@ -10,3 +10,4 @@ add_executable(gtfs_siri_bridge main.cpp)
 target_include_directories(gtfs_siri_bridge PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../../generated/cpp
 )
+

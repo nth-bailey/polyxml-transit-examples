@@ -38,3 +38,4 @@ zod = true
 target = "csharp"
 output = "csharp"
 namespace = "Transit.Siri"
+

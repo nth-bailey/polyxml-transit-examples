@@ -89,7 +89,9 @@ fn translate_gtfs_to_siri<'a>(entity: &'a GtfsEntity) -> Siri<'a> {
     let bearing = pos.and_then(|p| p.bearing);
 
     let line_ref = trip.map(|t| t.route_id.as_str()).unwrap_or("LINE_4");
-    let trip_id = trip.map(|t| t.trip_id.as_str()).unwrap_or("TRIP_NL_GVB_4_1042");
+    let trip_id = trip
+        .map(|t| t.trip_id.as_str())
+        .unwrap_or("TRIP_NL_GVB_4_1042");
     let veh_id = desc.map(|d| d.id.as_str()).unwrap_or("GVB_TRAM_2042");
     let line_name = desc.and_then(|d| d.label.as_deref()).unwrap_or("Tram 4");
 
@@ -170,7 +172,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!(
         "Ingesting Live Transit Telemetry: Entity {} (Vehicle: {})",
         entity.id,
-        entity.vehicle.vehicle.as_ref().map(|v| v.id.as_str()).unwrap_or("N/A")
+        entity
+            .vehicle
+            .vehicle
+            .as_ref()
+            .map(|v| v.id.as_str())
+            .unwrap_or("N/A")
     );
 
     // 1. Measure translation and XML serialization
@@ -179,7 +186,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let xml_output = siri_msg.to_xml_string()?;
     let elapsed_xml = start_xml.elapsed();
 
-    println!("\n[1] Generated CEN SIRI v2.0 XML Message (latency: {:.2?}):", elapsed_xml);
+    println!(
+        "\n[1] Generated CEN SIRI v2.0 XML Message (latency: {:.2?}):",
+        elapsed_xml
+    );
     println!("{}", xml_output);
 
     assert!(xml_output.contains("Siri"));
@@ -192,7 +202,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let json_output = siri_msg.to_json_string()?;
     let elapsed_json = start_json.elapsed();
 
-    println!("\n[2] Generated Native JSON on Same Model (latency: {:.2?}):", elapsed_json);
+    println!(
+        "\n[2] Generated Native JSON on Same Model (latency: {:.2?}):",
+        elapsed_json
+    );
     println!("{}", json_output);
 
     // 3. Measure Zero-Copy JSON Deserialization back into Siri model
@@ -214,8 +227,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("    Restored VehicleRef: {}", restored_journey.vehicle_ref);
     println!(
         "    Restored Coordinates: ({}, {})",
-        restored_journey.vehicle_location.latitude,
-        restored_journey.vehicle_location.longitude
+        restored_journey.vehicle_location.latitude, restored_journey.vehicle_location.longitude
     );
 
     assert_eq!(restored_journey.vehicle_ref, "GVB_TRAM_2042");
