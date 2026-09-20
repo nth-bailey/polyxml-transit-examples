@@ -1,0 +1,109 @@
+syntax = "proto2";
+
+package transit_realtime;
+
+option java_package = "com.google.transit.realtime";
+option csharp_namespace = "TransitRealtime";
+
+// The contents of a feed message.
+// Each message in the stream is obtained as response to an appropriate
+// HTTP GET request.
+message FeedMessage {
+  required FeedHeader header = 1;
+  repeated FeedEntity entity = 2;
+}
+
+// Metadata about a feed, included in feed messages.
+message FeedHeader {
+  required string gtfs_realtime_version = 1;
+  optional Incrementality incrementality = 2 [default = FULL_DATASET];
+  optional uint64 timestamp = 3;
+
+  enum Incrementality {
+    FULL_DATASET = 0;
+    DIFFERENTIAL = 1;
+  }
+}
+
+// A definition (or update) of an entity in the transit feed.
+message FeedEntity {
+  required string id = 1;
+  optional bool is_deleted = 2 [default = false];
+  optional TripUpdate trip_update = 3;
+  optional VehiclePosition vehicle = 4;
+  optional Alert alert = 5;
+}
+
+// Real-time positioning information for a given vehicle.
+message VehiclePosition {
+  optional TripDescriptor trip = 1;
+  optional VehicleDescriptor vehicle = 8;
+  optional Position position = 2;
+  optional uint32 current_stop_sequence = 3;
+  optional string stop_id = 7;
+  optional VehicleStopStatus current_status = 4 [default = IN_TRANSIT_TO];
+  optional uint64 timestamp = 5;
+  optional CongestionLevel congestion_level = 6;
+  optional OccupancyStatus occupancy_status = 9;
+
+  enum VehicleStopStatus {
+    INCOMING_AT = 0;
+    STOPPED_AT = 1;
+    IN_TRANSIT_TO = 2;
+  }
+
+  enum CongestionLevel {
+    UNKNOWN_CONGESTION_LEVEL = 0;
+    RUNNING_SMOOTHLY = 1;
+    STOP_AND_GO = 2;
+    CONGESTION = 3;
+    SEVERE_CONGESTION = 4;
+  }
+
+  enum OccupancyStatus {
+    EMPTY = 0;
+    MANY_SEATS_AVAILABLE = 1;
+    FEW_SEATS_AVAILABLE = 2;
+    STANDING_ROOM_ONLY = 3;
+    CRUSHED_STANDING_ROOM_ONLY = 4;
+    FULL = 5;
+    NOT_ACCEPTING_PASSENGERS = 6;
+  }
+}
+
+// A position of a vehicle in WGS-84 coordinates.
+message Position {
+  required float latitude = 1;
+  required float longitude = 2;
+  optional float bearing = 3;
+  optional double odometer = 4;
+  optional float speed = 5;
+}
+
+// A descriptor for a vehicle.
+message VehicleDescriptor {
+  optional string id = 1;
+  optional string label = 2;
+  optional string license_plate = 3;
+}
+
+// A descriptor that identifies a single instance of a GTFS trip.
+message TripDescriptor {
+  optional string trip_id = 1;
+  optional string route_id = 5;
+  optional uint32 direction_id = 6;
+  optional string start_time = 2;
+  optional string start_date = 3;
+  optional ScheduleRelationship schedule_relationship = 4;
+
+  enum ScheduleRelationship {
+    SCHEDULED = 0;
+    ADDED = 1;
+    UNSCHEDULED = 2;
+    CANCELED = 3;
+  }
+}
+
+// Placeholders for full GTFS-RT spec compatibility
+message TripUpdate {}
+message Alert {}

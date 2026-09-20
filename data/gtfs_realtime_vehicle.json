@@ -1,0 +1,41 @@
+{
+  "header": {
+    "gtfs_realtime_version": "2.0",
+    "incrementality": "FULL_DATASET",
+    "timestamp": 1789886400
+  },
+  "entity": [
+    {
+      "id": "NL_ARR_GVB_TRAM_4_2042",
+      "is_deleted": false,
+      "vehicle": {
+        "trip": {
+          "trip_id": "TRIP_NL_GVB_4_1042",
+          "route_id": "LINE_4",
+          "direction_id": 0,
+          "start_time": "14:00:00",
+          "start_date": "20260920",
+          "schedule_relationship": "SCHEDULED"
+        },
+        "vehicle": {
+          "id": "GVB_TRAM_2042",
+          "label": "Tram 4 - Centraal Station",
+          "license_plate": "NL-GVB-2042"
+        },
+        "position": {
+          "latitude": 52.3702,
+          "longitude": 4.8952,
+          "bearing": 142.5,
+          "speed": 11.4,
+          "odometer": 18450.0
+        },
+        "current_stop_sequence": 7,
+        "stop_id": "NL:S:30000001",
+        "current_status": "IN_TRANSIT_TO",
+        "timestamp": 1789886400,
+        "congestion_level": "RUNNING_SMOOTHLY",
+        "occupancy_status": "MANY_SEATS_AVAILABLE"
+      }
+    }
+  ]
+}

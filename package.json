@@ -1,0 +1,12 @@
+{
+  "name": "polyxml-transit-examples",
+  "version": "1.0.0",
+  "description": "Google GTFS-Realtime to CEN SIRI Transit Bridge across 7 PolyXML Languages",
+  "type": "module",
+  "scripts": {
+    "transit:ts": "node --experimental-strip-types examples/typescript/index.ts"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

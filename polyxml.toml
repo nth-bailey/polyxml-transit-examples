@@ -1,0 +1,40 @@
+[workspace]
+name = "gtfs-siri-transit-bridge"
+schemas = ["schemas/transit/siri_core.xsd"]
+output_base_dir = "generated"
+
+[[generate]]
+target = "rust"
+output = "rust"
+zero_copy = true
+codecs = true
+
+[[generate]]
+target = "python"
+output = "python"
+backend = "dataclass"
+codecs = true
+
+[[generate]]
+target = "go"
+output = "go"
+package = "siri"
+
+[[generate]]
+target = "cpp"
+output = "cpp"
+
+[[generate]]
+target = "java"
+output = "java"
+package = "com.transit.siri"
+
+[[generate]]
+target = "typescript"
+output = "typescript"
+zod = true
+
+[[generate]]
+target = "csharp"
+output = "csharp"
+namespace = "Transit.Siri"

@@ -1,0 +1,12 @@
+{
+  "name": "gtfs-siri-bridge-ts",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Google GTFS-Realtime to CEN SIRI Transit Bridge (TypeScript)",
+  "scripts": {
+    "start": "node --experimental-strip-types index.ts"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

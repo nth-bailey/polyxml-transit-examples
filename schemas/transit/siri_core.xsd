@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:siri="http://www.siri.org.uk/siri"
+           targetNamespace="http://www.siri.org.uk/siri"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="2.0">
+
+  <!-- ===================================================================== -->
+  <!-- Enumerations                                                          -->
+  <!-- ===================================================================== -->
+
+  <xs:simpleType name="ProgressRateEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="noProgress"/>
+      <xs:enumeration value="slowProgress"/>
+      <xs:enumeration value="normalProgress"/>
+      <xs:enumeration value="fastProgress"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="OccupancyEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="manySeatsAvailable"/>
+      <xs:enumeration value="fewSeatsAvailable"/>
+      <xs:enumeration value="standingAvailable"/>
+      <xs:enumeration value="full"/>
+      <xs:enumeration value="notAcceptingPassengers"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===================================================================== -->
+  <!-- Core Types                                                            -->
+  <!-- ===================================================================== -->
+
+  <xs:complexType name="LocationStructure">
+    <xs:sequence>
+      <xs:element name="Longitude" type="xs:double"/>
+      <xs:element name="Latitude" type="xs:double"/>
+      <xs:element name="Altitude" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FramedVehicleJourneyRefStructure">
+    <xs:sequence>
+      <xs:element name="DataFrameRef" type="xs:string"/>
+      <xs:element name="DatedVehicleJourneyRef" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MonitoredCallStructure">
+    <xs:sequence>
+      <xs:element name="StopPointRef" type="xs:string"/>
+      <xs:element name="VisitNumber" type="xs:int" minOccurs="0"/>
+      <xs:element name="StopPointName" type="xs:string" minOccurs="0"/>
+      <xs:element name="VehicleAtStop" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="AimedArrivalTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="ExpectedArrivalTime" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MonitoredVehicleJourneyStructure">
+    <xs:sequence>
+      <xs:element name="LineRef" type="xs:string"/>
+      <xs:element name="DirectionRef" type="xs:string"/>
+      <xs:element name="FramedVehicleJourneyRef" type="siri:FramedVehicleJourneyRefStructure" minOccurs="0"/>
+      <xs:element name="PublishedLineName" type="xs:string" minOccurs="0"/>
+      <xs:element name="OperatorRef" type="xs:string" minOccurs="0"/>
+      <xs:element name="OriginRef" type="xs:string" minOccurs="0"/>
+      <xs:element name="DestinationRef" type="xs:string" minOccurs="0"/>
+      <xs:element name="DestinationName" type="xs:string" minOccurs="0"/>
+      <xs:element name="VehicleLocation" type="siri:LocationStructure"/>
+      <xs:element name="Bearing" type="xs:double" minOccurs="0"/>
+      <xs:element name="ProgressRate" type="siri:ProgressRateEnum" minOccurs="0"/>
+      <xs:element name="Occupancy" type="siri:OccupancyEnum" minOccurs="0"/>
+      <xs:element name="Delay" type="xs:string" minOccurs="0"/>
+      <xs:element name="VehicleRef" type="xs:string"/>
+      <xs:element name="MonitoredCall" type="siri:MonitoredCallStructure" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleActivityStructure">
+    <xs:sequence>
+      <xs:element name="RecordedAtTime" type="xs:dateTime"/>
+      <xs:element name="ValidUntilTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="VehicleMonitoringRef" type="xs:string"/>
+      <xs:element name="MonitoredVehicleJourney" type="siri:MonitoredVehicleJourneyStructure"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleMonitoringDeliveryStructure">
+    <xs:sequence>
+      <xs:element name="ResponseTimestamp" type="xs:dateTime"/>
+      <xs:element name="VehicleActivity" type="siri:VehicleActivityStructure" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ServiceDeliveryStructure">
+    <xs:sequence>
+      <xs:element name="ResponseTimestamp" type="xs:dateTime"/>
+      <xs:element name="ProducerRef" type="xs:string"/>
+      <xs:element name="VehicleMonitoringDelivery" type="siri:VehicleMonitoringDeliveryStructure"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===================================================================== -->
+  <!-- Root Element: Siri                                                    -->
+  <!-- ===================================================================== -->
+
+  <xs:element name="Siri">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ServiceDelivery" type="siri:ServiceDeliveryStructure"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" default="2.0"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

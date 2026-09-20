@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-all:
+    name: Polyglot Integration Suite (All 7 Languages)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PolyXML Core Compiler
+        uses: actions/checkout@v4
+        with:
+          repository: nth-bailey/PolyXML
+          path: PolyXML
+
+      - name: Checkout Transit Examples
+        uses: actions/checkout@v4
+        with:
+          path: polyxml-transit-examples
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Set up Go 1.22+
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install System Build Tools (CMake & Ninja)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++
+
+      - name: Build PolyXML Core CLI & Python Wheels
+        working-directory: PolyXML
+        run: |
+          cargo build -p polyxml-cli --release
+          python3 -m venv .venv
+          . .venv/bin/activate
+          pip install maturin
+          maturin develop --manifest-path crates/polyxml-python/Cargo.toml
+
+      - name: Install Node dependencies
+        working-directory: polyxml-transit-examples
+        run: |
+          npm install
+
+      - name: Add PolyXML CLI to PATH
+        run: |
+          echo "$(pwd)/PolyXML/target/release" >> $GITHUB_PATH
+
+      - name: Execute Full Polyglot Test Suite (run_all.sh)
+        working-directory: polyxml-transit-examples
+        run: |
+          ./scripts/run_all.sh
