@@ -9,3 +9,4 @@ if command -v cargo >/dev/null 2>&1 && [ -f examples/rust/Cargo.toml ]; then
         exit 1
     }
 fi
+
